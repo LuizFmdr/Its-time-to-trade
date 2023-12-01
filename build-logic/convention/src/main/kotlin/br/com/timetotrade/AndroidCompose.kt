@@ -1,6 +1,5 @@
-package timetotrade
+package br.com.timetotrade
 
-import br.com.timetotrade.libs
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
