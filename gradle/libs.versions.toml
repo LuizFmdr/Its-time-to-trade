@@ -3,7 +3,7 @@
 kotlinSerialization = "1.9.20"
 
 androidGradlePlugin = "8.2.0"
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 gradle = "8.0.2"
 hilt = "2.48.1"
 retrofitKotlinxSerializationJson = "1.0.0"
