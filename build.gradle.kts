@@ -35,6 +35,12 @@ detekt {
     buildUponDefaultConfig = true
     basePath = projectDir.absolutePath
     reportsDir = file("$projectDir/build/reports/detekt/")
+
+    source.setFrom(
+        files(
+            "$projectDir/app/src",
+        )
+    )
 }
 
 tasks.withType<Detekt>().configureEach {
