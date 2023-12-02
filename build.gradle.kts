@@ -49,7 +49,6 @@ tasks.withType<Detekt>().configureEach {
         html.required.set(true)
         txt.required.set(true)
         sarif.required.set(true)
-        sarif.outputLocation.set(file("build/reports/detekt.sarif"))
         basePath = projectDir.absolutePath
         reportsDir = file("$projectDir/build/reports/detekt/")
     }
