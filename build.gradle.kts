@@ -31,7 +31,7 @@ dependencies {
 
 detekt {
     toolVersion = libs.versions.detekt.get()
-    config.setFrom(file("$rootDir/detekt/detekt.yml"))
+    config.setFrom(file("${rootProject.projectDir}/detekt/detekt.yml"))
     buildUponDefaultConfig = true
     basePath = projectDir.absolutePath
     reportsDir = file("$projectDir/build/reports/detekt/")
@@ -39,13 +39,12 @@ detekt {
 
 tasks.withType<Detekt>().configureEach {
     reports {
-        xml.required.set(false)
-        html.required.set(false)
-        txt.required.set(false)
+        xml.required.set(true)
+        html.required.set(true)
+        txt.required.set(true)
         sarif.required.set(true)
         sarif.outputLocation.set(file("build/reports/detekt.sarif"))
         basePath = projectDir.absolutePath
         reportsDir = file("$projectDir/build/reports/detekt/")
     }
 }
-
