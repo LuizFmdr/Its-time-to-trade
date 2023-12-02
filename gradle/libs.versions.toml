@@ -1,7 +1,5 @@
 [versions]
 
-kotlinSerialization = "1.9.20"
-
 androidGradlePlugin = "8.2.0"
 kotlin = "1.9.20"
 gradle = "8.0.2"
@@ -10,7 +8,7 @@ retrofitKotlinxSerializationJson = "1.0.0"
 androidxCore = "1.12.0"
 androidxCoreSplashscreen = "1.0.1"
 androidxComposeCompiler = "1.5.5"
-detekt = "1.23.3"
+detekt = "1.23.4"
 androidxComposeBom = "2023.10.01"
 accompanist = "0.28.0"
 activity-compose = "1.8.1"
@@ -65,7 +63,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 coil = "io.coil-kt:coil-compose:2.4.0"
-kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinSerialization" }
+kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines-android" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-android" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
