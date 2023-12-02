@@ -16,6 +16,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        ((9 + 25)..100).forEach {
+            println(it)
+        }
+
         setContent {
             TimeToTradeTheme {// A surface container using the 'background' color from the theme
                 Surface(

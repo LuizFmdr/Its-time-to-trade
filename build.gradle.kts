@@ -1,3 +1,10 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
+plugins {
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.detekt)
+}
+
 buildscript {
     repositories {
         google()
@@ -18,7 +25,26 @@ buildscript {
     }
 }
 
-plugins {
-    alias(libs.plugins.ksp) apply false
+dependencies {
+    detektPlugins(libs.detekt.formatting)
 }
 
+detekt {
+    toolVersion = libs.versions.detekt.get()
+    config.setFrom(file("detekt/detekt.yml"))
+    buildUponDefaultConfig = true
+    basePath = rootProject.projectDir.absolutePath
+}
+
+tasks.withType<Detekt>().configureEach {
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        txt.required.set(true)
+        sarif.required.set(true)
+    }
+}
+
+val reportMerge by tasks.registering(io.gitlab.arturbosch.detekt.report.ReportMergeTask::class) {
+    output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.xml")) // or "reports/detekt/merge.sarif"
+}
