@@ -19,7 +19,10 @@ class MainActivity : ComponentActivity() {
         ((9 + 25)..100).forEach {
             println(it)
         }
-
+        val moreMagicNumber = 100
+        ((9 + 25)..moreMagicNumber).forEach {
+            println(it)
+        }
         setContent {
             TimeToTradeTheme {// A surface container using the 'background' color from the theme
                 Surface(

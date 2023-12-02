@@ -18,10 +18,10 @@ buildscript {
         }
     }
     dependencies {
-        classpath (libs.android.gradlePlugin)
-        classpath (libs.kotlin.gradlePlugin)
-        classpath (libs.kotlin.serialization)
-        classpath (libs.hilt.android.plugin)
+        classpath(libs.android.gradlePlugin)
+        classpath(libs.kotlin.gradlePlugin)
+        classpath(libs.kotlin.serialization)
+        classpath(libs.hilt.android.plugin)
     }
 }
 
@@ -31,20 +31,21 @@ dependencies {
 
 detekt {
     toolVersion = libs.versions.detekt.get()
-    config.setFrom(file("detekt/detekt.yml"))
+    config.setFrom(file("$rootDir/detekt/detekt.yml"))
     buildUponDefaultConfig = true
-    basePath = rootProject.projectDir.absolutePath
+    basePath = projectDir.absolutePath
+    reportsDir = file("$projectDir/build/reports/detekt/")
 }
 
 tasks.withType<Detekt>().configureEach {
     reports {
-        xml.required.set(true)
-        html.required.set(true)
-        txt.required.set(true)
+        xml.required.set(false)
+        html.required.set(false)
+        txt.required.set(false)
         sarif.required.set(true)
+        sarif.outputLocation.set(file("build/reports/detekt.sarif"))
+        basePath = projectDir.absolutePath
+        reportsDir = file("$projectDir/build/reports/detekt/")
     }
 }
 
-val reportMerge by tasks.registering(io.gitlab.arturbosch.detekt.report.ReportMergeTask::class) {
-    output.set(rootProject.layout.buildDirectory.file("reports/detekt/merge.xml")) // or "reports/detekt/merge.sarif"
-}
