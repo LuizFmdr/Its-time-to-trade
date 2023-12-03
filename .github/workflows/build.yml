@@ -35,11 +35,19 @@ jobs:
       - name: Detekt Verification
         run: ./gradlew detekt
 
-      - name: Danger # And Danger action
-        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0
-        with:
-          args: --dangerfile config/danger/config.df.kts # Note I have config located like this
+      - name: Detekt auto correct
+        run: ./gradlew --auto-correct
+
+      - name: Commit updated file
+        run: |
+          git add ."
+          git commit -m "Detekt auto correct"
+          git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Extracted automatically
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
+      - name: Upload SARIF to GitHub using the upload-sarif action
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+            sarif_file: build/reports/detekt/detekt.sarif
