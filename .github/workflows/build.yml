@@ -9,6 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,8 +35,11 @@ jobs:
       - name: Detekt Verification
         run: ./gradlew detekt
 
-      - name: Upload SARIF to GitHub using the upload-sarif action
-        uses: github/codeql-action/upload-sarif@v2
-        if: success() || failure()
+      - name: Danger # And Danger action
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0
         with:
-            sarif_file: build/reports/detekt/detekt.sarif
+          args: --dangerfile config/danger/config.df.kts # Note I have config located like this
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Extracted automatically
+
+

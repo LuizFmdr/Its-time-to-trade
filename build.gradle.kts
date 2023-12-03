@@ -31,7 +31,7 @@ dependencies {
 
 detekt {
     toolVersion = libs.versions.detekt.get()
-    config.setFrom(file("${rootProject.projectDir}/detekt/detekt.yml"))
+    config.setFrom(file("${rootProject.projectDir}/config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
     basePath = projectDir.absolutePath
     reportsDir = file("$projectDir/build/reports/detekt/")
