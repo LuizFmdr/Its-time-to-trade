@@ -36,7 +36,7 @@ jobs:
         run: ./gradlew detekt
 
       - name: Detekt auto correct
-        run: ./gradlew --auto-correct
+        run: ./gradlew detekt --auto-correct
 
       - name: Commit updated file
         run: |
