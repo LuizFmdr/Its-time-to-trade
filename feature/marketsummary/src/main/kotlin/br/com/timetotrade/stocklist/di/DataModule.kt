@@ -2,8 +2,8 @@ package br.com.timetotrade.stocklist.di
 
 import br.com.timetotrade.stocklist.data.TradeDataSource
 import br.com.timetotrade.stocklist.data.TradeDataSourceImpl
-import br.com.timetotrade.stocklist.domain.TradeStocksRepository
-import br.com.timetotrade.stocklist.domain.TradeStocksRepositoryImpl
+import br.com.timetotrade.stocklist.domain.MarketSummaryRepository
+import br.com.timetotrade.stocklist.domain.MarketSummaryRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,6 +20,6 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindStocksRepository(
-        stocksRepositoryImpl: TradeStocksRepositoryImpl
-    ): TradeStocksRepository
+        stocksRepositoryImpl: MarketSummaryRepositoryImpl
+    ): MarketSummaryRepository
 }

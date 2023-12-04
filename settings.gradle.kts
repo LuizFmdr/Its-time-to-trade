@@ -21,7 +21,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 
-include(":feature:stocklist")
+include(":feature:marketsummary")
 
 include(
     ":libs:design-system",

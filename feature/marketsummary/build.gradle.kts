@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "br.com.timetotrade.feature.menulist"
+    namespace = "br.com.timetotrade.feature.market.summary"
 }
 
 dependencies {

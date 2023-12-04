@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.timetotrade.stocklist.StockListRoute
+import br.com.timetotrade.stocklist.MarketSummaryRoute
 
 @Composable
 fun AppNavHost(
@@ -16,10 +16,10 @@ fun AppNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = "Main",
+        startDestination = "Summary",
     ) {
-        composable("Main") {
-            StockListRoute()
+        composable("Summary") {
+            MarketSummaryRoute()
         }
     }
 }

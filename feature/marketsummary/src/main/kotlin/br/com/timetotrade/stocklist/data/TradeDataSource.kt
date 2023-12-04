@@ -6,8 +6,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-const val MAX_REQUEST_COUNT = 5
-
 interface TradeDataSource {
 
     fun getMarketSummary(): Flow<List<MarketResult>>

@@ -1,7 +1,7 @@
 package br.com.timetotrade.stocklist.presentation
 
 import androidx.lifecycle.viewModelScope
-import br.com.timetotrade.stocklist.domain.TradeStocksRepository
+import br.com.timetotrade.stocklist.domain.MarketSummaryRepository
 import br.com.timetotrade.stocklist.domain.model.MarketSummary
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class StockListViewModel @Inject constructor(
-    private val repository: TradeStocksRepository
+    private val repository: MarketSummaryRepository
 ) : StateViewModel<StockListViewModel.StockListState>(StockListState()) {
 
     init {

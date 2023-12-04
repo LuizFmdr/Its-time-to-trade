@@ -6,14 +6,14 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-interface TradeStocksRepository {
+interface MarketSummaryRepository {
 
     fun getMarketSummary(): Flow<List<MarketSummary>>
 }
 
-class TradeStocksRepositoryImpl @Inject constructor(
+class MarketSummaryRepositoryImpl @Inject constructor(
     private val dataSource: TradeDataSource
-) : TradeStocksRepository {
+) : MarketSummaryRepository {
 
     override fun getMarketSummary(): Flow<List<MarketSummary>> {
         return dataSource.getMarketSummary()

@@ -58,7 +58,7 @@ dependencies {
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.kotlinx.serialization.json)
 
-    implementation(projects.feature.stocklist)
+    implementation(projects.feature.marketsummary)
     implementation(projects.libs.designSystem)
 
     debugImplementation(libs.leakcanary)

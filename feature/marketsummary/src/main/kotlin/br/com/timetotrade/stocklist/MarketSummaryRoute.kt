@@ -9,7 +9,7 @@ import br.com.timetotrade.stocklist.presentation.StockListViewModel
 import br.com.timetotrade.stocklist.presentation.view.MarketSummaryScreen
 
 @Composable
-fun StockListRoute(viewModel: StockListViewModel = hiltViewModel()) {
+fun MarketSummaryRoute(viewModel: StockListViewModel = hiltViewModel()) {
 
     val state by viewModel.state.collectAsState()
 
