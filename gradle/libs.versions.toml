@@ -1,7 +1,7 @@
 [versions]
 
 androidGradlePlugin = "8.2.0"
-kotlin = "1.9.20"
+kotlin = "1.9.21"
 gradle = "8.2.0"
 hilt = "2.49"
 retrofitKotlinxSerializationJson = "1.0.0"
@@ -31,7 +31,7 @@ truth = "1.1.5"
 turbine = "1.0.0"
 leakcanary = "2.12"
 secrets = "2.0.1"
-kotlin1920 = "1.9.20"
+kotlin1920 = "1.9.21"
 material = "1.10.0"
 uiTooling = "1.5.4"
 
