@@ -35,17 +35,6 @@ jobs:
       - name: Detekt Verification
         run: ./gradlew detekt
 
-      - name: Detekt auto correct
-        run: ./gradlew detekt --auto-correct
-
-      - name: Commit updated file
-        run: |
-          git add ."
-          git commit -m "Detekt auto correct"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload SARIF to GitHub using the upload-sarif action
         uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()
