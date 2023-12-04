@@ -1,5 +1,6 @@
-package br.com.timetotrade.stocklist.data
+package br.com.timetotrade.stocklist.data.source
 
+import br.com.timetotrade.stocklist.data.MarketService
 import br.com.timetotrade.stocklist.data.model.MarketResult
 import javax.inject.Inject
 import kotlinx.coroutines.delay

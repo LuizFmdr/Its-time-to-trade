@@ -6,6 +6,11 @@ data class MarketSummary(
     val exchange: String,
     val shortName: String,
     val regularMarketPreviousClose: RegularMarketValue,
+    val spark: Spark,
+)
+
+data class Spark(
+    val close: List<Float>
 )
 
 data class RegularMarketValue(
