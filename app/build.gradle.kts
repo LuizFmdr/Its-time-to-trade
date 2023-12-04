@@ -37,14 +37,15 @@ android {
         }
     }
 
-    buildFeatures {
-        buildConfig = true
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
 }
 
 dependencies {
@@ -57,7 +58,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.kotlinx.serialization.json)
-
+    implementation(libs.androidx.core.splashscreen)
     implementation(projects.feature.marketsummary)
     implementation(projects.libs.designSystem)
 
