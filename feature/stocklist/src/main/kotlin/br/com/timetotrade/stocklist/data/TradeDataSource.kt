@@ -1,37 +1,27 @@
 package br.com.timetotrade.stocklist.data
 
-import br.com.timetotrade.network.ResponseWrapper
-import br.com.timetotrade.stocklist.data.model.StockStatisticsBodyResponse
-import br.com.timetotrade.stocklist.data.model.StockStatisticsMetaResponse
+import br.com.timetotrade.stocklist.data.model.MarketResult
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-const val DEFAULT_STOCKS_LIST_SIZE = 5
-
-//this api has a hard limit for monthly requests
-const val MAX_REQUEST_COUNT = 10
+const val MAX_REQUEST_COUNT = 5
 
 interface TradeDataSource {
 
-    fun getMarketScreener(screenerType: String): Flow<ResponseWrapper<StockStatisticsBodyResponse, StockStatisticsMetaResponse>>
+    fun getMarketSummary(): Flow<List<MarketResult>>
 }
 
-class TradeDataSourceImpl(
-    private val stocksService: StocksService
+class TradeDataSourceImpl @Inject constructor(
+    private val marketService: MarketService
 ) : TradeDataSource {
 
-    override fun getMarketScreener(screenerType: String): Flow<ResponseWrapper<StockStatisticsBodyResponse, StockStatisticsMetaResponse>> {
+    override fun getMarketSummary(): Flow<List<MarketResult>> {
         return flow {
-            val stocksList = stocksService.getMarketScreener(screenerType).body
-
-            stocksList.forEachIndexed { index, symbol ->
-                emit(stocksService.getStatistics(symbol))
-                if (index == DEFAULT_STOCKS_LIST_SIZE)
-                    delay(1000)
-
-                if (index == MAX_REQUEST_COUNT)
-                    return@forEachIndexed
+            while (true) {
+                emit(marketService.getMarketSummary().marketSummaryAndSparkResponse.marketResultList)
+                delay(8000)
             }
         }
     }

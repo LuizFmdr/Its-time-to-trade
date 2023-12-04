@@ -2,12 +2,14 @@ package br.com.timetotrade.stocklist.presentation
 
 import androidx.lifecycle.viewModelScope
 import br.com.timetotrade.stocklist.domain.TradeStocksRepository
-import br.com.timetotrade.stocklist.domain.model.Stock
+import br.com.timetotrade.stocklist.domain.model.MarketSummary
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
@@ -22,29 +24,30 @@ class StockListViewModel @Inject constructor(
 
     private fun getStocks() {
         viewModelScope.launch {
-            repository.getStocks()
+            repository.getMarketSummary()
                 .flowOn(Dispatchers.IO)
                 .onStart { setState { copy(isLoading = true) } }
+                .onEach { summary ->
+                    handleSuccess(summary)
+                }
                 .catch {
                     setState { copy(isLoading = false, errorMessage = it.message) }
                 }
-                .collect { stock ->
-                    handleSuccess(stock)
-                }
+                .collect()
         }
     }
 
-    private fun handleSuccess(stock: Stock) {
+    private fun handleSuccess(marketSummary: List<MarketSummary>) {
         setState {
             copy(
                 isLoading = false,
-                stocks = stocks.apply { add(stock) }
+                marketSummaryList = marketSummary
             )
         }
     }
 
     data class StockListState(
-        val stocks: MutableList<Stock> = mutableListOf(),
+        val marketSummaryList: List<MarketSummary> = emptyList(),
         val isLoading: Boolean = false,
         val errorMessage: String? = null
     )

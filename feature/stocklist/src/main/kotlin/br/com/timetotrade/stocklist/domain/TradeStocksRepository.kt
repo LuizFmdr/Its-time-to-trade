@@ -1,29 +1,30 @@
 package br.com.timetotrade.stocklist.domain
 
 import br.com.timetotrade.stocklist.data.TradeDataSource
-import br.com.timetotrade.stocklist.domain.model.Stock
+import br.com.timetotrade.stocklist.domain.model.MarketSummary
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 interface TradeStocksRepository {
 
-    fun getStocks(): Flow<Stock>
+    fun getMarketSummary(): Flow<List<MarketSummary>>
 }
 
 class TradeStocksRepositoryImpl @Inject constructor(
     private val dataSource: TradeDataSource
 ) : TradeStocksRepository {
 
-    //TODO: screener selection will be implemented in the future
-    override fun getStocks(): Flow<Stock> {
-        return dataSource.getMarketScreener("trending")
-            .map { response ->
-                Stock(
-                    symbol = response.meta.symbol,
-                    enterpriseValue = response.body.enterpriseValue.fmt,
-                    priceToEarnings = response.body.forwardPE.raw
-                )
+    override fun getMarketSummary(): Flow<List<MarketSummary>> {
+        return dataSource.getMarketSummary()
+            .map {
+                it.map { result ->
+                    MarketSummary(
+                        symbol = result.symbol,
+                        fullExchangeName = result.fullExchangeName,
+                        exchange = result.exchange
+                    )
+                }
             }
     }
 }

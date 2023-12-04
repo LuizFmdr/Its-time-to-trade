@@ -29,12 +29,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.timetotrade.desingsystem.TimeToTradeTheme
-import br.com.timetotrade.stocklist.domain.model.Stock
+import br.com.timetotrade.stocklist.domain.model.MarketSummary
 
 @Composable
-fun StockListScreen(
+fun MarketSummaryScreen(
     loading: Boolean = false,
-    stockList: List<Stock> = listOf(),
+    marketSummaryList: List<MarketSummary> = listOf(),
     listState: LazyListState = rememberLazyListState(),
 ) {
     ScreenLoading(show = loading)
@@ -47,7 +47,7 @@ fun StockListScreen(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(stockList) { stock ->
+            items(marketSummaryList) { stock ->
                 StockItem(stock)
             }
 
@@ -74,7 +74,7 @@ fun ScreenLoading(show: Boolean = false) {
 }
 
 @Composable
-fun StockItem(stock: Stock) {
+fun StockItem(marketSummary: MarketSummary) {
     Row(
         modifier = Modifier
             .aspectRatio(3.22f)
@@ -93,7 +93,7 @@ fun StockItem(stock: Stock) {
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = stock.symbol,
+                text = marketSummary.symbol,
                 style = TextStyle(
                     fontSize = 21.sp,
                     fontWeight = FontWeight.W600,
@@ -101,7 +101,7 @@ fun StockItem(stock: Stock) {
                 ),
             )
             Text(
-                text = stock.enterpriseValue,
+                text = marketSummary.fullExchangeName,
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W400,
@@ -120,9 +120,9 @@ fun DefaultPreview() {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            StockListScreen(
+            MarketSummaryScreen(
                 loading = false,
-                stockList = createMock()
+                marketSummaryList = createMock()
             )
         }
     }
@@ -136,20 +136,18 @@ fun DefaultPreviewDark() {
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            StockListScreen(
+            MarketSummaryScreen(
                 loading = false,
-                stockList = createMock()
+                marketSummaryList = createMock()
             )
         }
     }
 }
 
-private fun createMock(): List<Stock> {
+private fun createMock(): List<MarketSummary> {
     return listOf(
-        Stock("AAPL", "3.04T", 7.15),
-        Stock("MSFT", "2.22T", 10.98),
-        Stock("GOOG", "1.83T", 30.12),
-        Stock("AMZN", "1.59T", 60.12),
-        Stock("FB", "1.01T", 20.12),
+        MarketSummary("AAPL", "CME", "CBOT"),
+        MarketSummary("GOOG", "CME", "CBOT"),
+        MarketSummary("AMZN", "CME", "CBOT"),
     )
 }

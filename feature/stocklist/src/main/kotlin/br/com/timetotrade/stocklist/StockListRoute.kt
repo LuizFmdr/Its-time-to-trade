@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import br.com.timetotrade.stocklist.presentation.StockListViewModel
-import br.com.timetotrade.stocklist.presentation.view.StockListScreen
+import br.com.timetotrade.stocklist.presentation.view.MarketSummaryScreen
 
 @Composable
 fun StockListRoute(viewModel: StockListViewModel = hiltViewModel()) {
@@ -15,10 +15,10 @@ fun StockListRoute(viewModel: StockListViewModel = hiltViewModel()) {
 
     val listState = rememberLazyListState()
 
-    StockListScreen(
+    MarketSummaryScreen(
         listState = listState,
         loading = state.isLoading,
-        stockList = state.stocks,
+        marketSummaryList = state.marketSummaryList
     )
 }
 
