@@ -1,12 +1,12 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.timetotrade.android.application)
+    alias(libs.plugins.timetotrade.android.application.compose)
     alias(libs.plugins.timetotrade.android.hilt)
+    alias(libs.plugins.secrets)
 }
 
 android {
     namespace = "br.com.timetotrade"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.timetotrade"
@@ -22,27 +22,23 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+        }
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+
     buildFeatures {
-        compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
@@ -53,15 +49,19 @@ android {
 
 dependencies {
 
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(projects.feature.menuList)
-    implementation(projects.libs.designSystem)
     implementation(libs.androidx.activity.compose)
     implementation(libs.retrofit)
+    implementation(libs.coil)
+    implementation(libs.androidx.compose.navigation)
     implementation(libs.logging.interceptor)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.kotlinx.serialization.json)
 
+    implementation(projects.feature.marketsummary)
+    implementation(projects.libs.designSystem)
+
+    debugImplementation(libs.leakcanary)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.compose.ui.tooling)
     androidTestImplementation(libs.androidx.compose.ui.tooling.preview)

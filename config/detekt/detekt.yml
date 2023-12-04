@@ -10,7 +10,7 @@ complexity:
   active: true
   ComplexCondition:
     threshold: 3
-  ComplexMethod:
+  CyclomaticComplexMethod:
     threshold: 10
   LargeClass:
     threshold: 150
@@ -58,8 +58,6 @@ potential-bugs:
   active: true
   Deprecation:
     active: true
-  DuplicateCaseInWhenExpression:
-    active: true
   EqualsAlwaysReturnsTrueOrFalse:
     active: true
   EqualsWithHashCodeExist:
@@ -82,11 +80,7 @@ potential-bugs:
     active: true
   MapGetWithNotNullAssertionOperator:
     active: true
-  MissingWhenCase:
-    active: true
   NullableToStringCall:
-    active: true
-  RedundantElseInWhen:
     active: true
   UnconditionalJumpStatementInLoop:
     active: true
