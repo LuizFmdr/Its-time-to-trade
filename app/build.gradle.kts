@@ -44,6 +44,10 @@ android {
     }
 }
 
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
+}
+
 dependencies {
 
     implementation(libs.androidx.activity.compose)
