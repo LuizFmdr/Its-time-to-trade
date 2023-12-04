@@ -1,7 +1,7 @@
 package br.com.timetotrade.stocklist.di
 
-import br.com.timetotrade.stocklist.data.TradeDataSource
-import br.com.timetotrade.stocklist.data.TradeDataSourceImpl
+import br.com.timetotrade.stocklist.data.MarketSummaryDataSource
+import br.com.timetotrade.stocklist.data.MarketSummaryDataSourceImpl
 import br.com.timetotrade.stocklist.domain.MarketSummaryRepository
 import br.com.timetotrade.stocklist.domain.MarketSummaryRepositoryImpl
 import dagger.Binds
@@ -15,8 +15,8 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindDataSource(
-        moviesDataSourceImpl: TradeDataSourceImpl
-    ): TradeDataSource
+        moviesDataSourceImpl: MarketSummaryDataSourceImpl
+    ): MarketSummaryDataSource
 
     @Binds
     abstract fun bindStocksRepository(

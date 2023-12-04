@@ -1,6 +1,5 @@
 package br.com.timetotrade.stocklist.presentation.view
 
-import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.timetotrade.desingsystem.TimeToTradeTheme
 import br.com.timetotrade.stocklist.domain.model.MarketSummary
+import br.com.timetotrade.stocklist.domain.model.RegularMarketValue
 
 @Composable
 fun MarketSummaryScreen(
@@ -39,20 +38,26 @@ fun MarketSummaryScreen(
 ) {
     ScreenLoading(show = loading)
 
-    Column {
-        //Search()
+    Column(
+        Modifier
+            .background(MaterialTheme.colorScheme.background)
+    ) {
 
+        Text(
+            text = "Market Summary",
+            style = TextStyle(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.W600,
+                color = MaterialTheme.colorScheme.onBackground,
+            ),
+        )
         LazyColumn(
             state = listState,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(marketSummaryList) { stock ->
-                StockItem(stock)
-            }
-
-            item {
-                ScreenLoading(show = loading)
+                SummaryItem(stock)
             }
         }
     }
@@ -64,8 +69,7 @@ fun ScreenLoading(show: Boolean = false) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
-                .background(Color.White),
+                .padding(16.dp),
             contentAlignment = Alignment.Center,
         ) {
             CircularProgressIndicator()
@@ -74,12 +78,12 @@ fun ScreenLoading(show: Boolean = false) {
 }
 
 @Composable
-fun StockItem(marketSummary: MarketSummary) {
+fun SummaryItem(marketSummary: MarketSummary) {
     Row(
         modifier = Modifier
             .aspectRatio(3.22f)
             .background(
-                color = MaterialTheme.colorScheme.surface,
+                color = MaterialTheme.colorScheme.onBackground,
                 shape = RoundedCornerShape(15.dp)
             )
             .clip(shape = RoundedCornerShape(15.dp)),
@@ -88,16 +92,15 @@ fun StockItem(marketSummary: MarketSummary) {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(vertical = 12.dp, horizontal = 16.dp)
-                .weight(1f),
-            verticalArrangement = Arrangement.SpaceBetween,
+                .padding(vertical = 12.dp, horizontal = 16.dp),
+            verticalArrangement = Arrangement.Top,
         ) {
             Text(
-                text = marketSummary.symbol,
+                text = marketSummary.shortName,
                 style = TextStyle(
                     fontSize = 21.sp,
                     fontWeight = FontWeight.W600,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = MaterialTheme.colorScheme.background,
                 ),
             )
             Text(
@@ -105,7 +108,22 @@ fun StockItem(marketSummary: MarketSummary) {
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W400,
-                    color = MaterialTheme.colorScheme.onSurface,
+                    color = MaterialTheme.colorScheme.background,
+                ),
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(vertical = 12.dp, horizontal = 16.dp),
+            verticalArrangement = Arrangement.Top,
+        ) {
+            Text(
+                text = marketSummary.regularMarketPreviousClose.fmt,
+                style = TextStyle(
+                    fontSize = 21.sp,
+                    fontWeight = FontWeight.W600,
+                    color = MaterialTheme.colorScheme.background,
                 ),
             )
         }
@@ -114,22 +132,6 @@ fun StockItem(marketSummary: MarketSummary) {
 
 @Composable
 @Preview(showBackground = true)
-fun DefaultPreview() {
-    TimeToTradeTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            MarketSummaryScreen(
-                loading = false,
-                marketSummaryList = createMock()
-            )
-        }
-    }
-}
-
-@Composable
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 fun DefaultPreviewDark() {
     TimeToTradeTheme {
         Column(
@@ -146,8 +148,55 @@ fun DefaultPreviewDark() {
 
 private fun createMock(): List<MarketSummary> {
     return listOf(
-        MarketSummary("AAPL", "CME", "CBOT"),
-        MarketSummary("GOOG", "CME", "CBOT"),
-        MarketSummary("AMZN", "CME", "CBOT"),
+        MarketSummary(
+            symbol = "ES=F",
+            fullExchangeName = "CME",
+            exchange = "CME",
+            shortName = "S&P Futures",
+            regularMarketPreviousClose = RegularMarketValue(
+                raw = 4400.0,
+                fmt = "4,400.00",
+            ),
+        ),
+        MarketSummary(
+            symbol = "RTY=F",
+            fullExchangeName = "CME",
+            exchange = "CME",
+            shortName = "Russell 2000 Futures",
+            regularMarketPreviousClose = RegularMarketValue(
+                raw = 4400.0,
+                fmt = "4,400.00",
+            )
+        ),
+        MarketSummary(
+            symbol = "NQ=F",
+            fullExchangeName = "CME",
+            exchange = "CME",
+            shortName = "Nasdaq Futures",
+            regularMarketPreviousClose = RegularMarketValue(
+                raw = 4400.0,
+                fmt = "4,400.00",
+            )
+        ),
+        MarketSummary(
+            symbol = "YM=F",
+            fullExchangeName = "CME",
+            exchange = "CME",
+            shortName = "Dow Futures",
+            regularMarketPreviousClose = RegularMarketValue(
+                raw = 4400.0,
+                fmt = "4,400.00",
+            ),
+        ),
+        MarketSummary(
+            symbol = "CL=F",
+            fullExchangeName = "CME",
+            exchange = "CME",
+            shortName = "Crude Oil Futures",
+            regularMarketPreviousClose = RegularMarketValue(
+                raw = 4400.0,
+                fmt = "4,400.00",
+            )
+        ),
     )
 }

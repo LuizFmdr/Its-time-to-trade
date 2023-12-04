@@ -6,20 +6,23 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-interface TradeDataSource {
+//As was requested, the update interval was set as 8 seconds
+const val UPDATE_INTERVAL = 8000L
+
+interface MarketSummaryDataSource {
 
     fun getMarketSummary(): Flow<List<MarketResult>>
 }
 
-class TradeDataSourceImpl @Inject constructor(
+class MarketSummaryDataSourceImpl @Inject constructor(
     private val marketService: MarketService
-) : TradeDataSource {
+) : MarketSummaryDataSource {
 
     override fun getMarketSummary(): Flow<List<MarketResult>> {
         return flow {
             while (true) {
                 emit(marketService.getMarketSummary().marketSummaryAndSparkResponse.marketResultList)
-                delay(8000)
+                delay(UPDATE_INTERVAL)
             }
         }
     }

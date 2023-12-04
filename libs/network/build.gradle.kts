@@ -13,6 +13,10 @@ android {
     }
 }
 
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
+}
+
 dependencies {
     api(libs.retrofit)
     implementation(libs.coil)

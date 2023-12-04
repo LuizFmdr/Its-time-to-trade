@@ -57,7 +57,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.kotlinx.serialization.json)
-
+    implementation(libs.androidx.core.splashscreen)
     implementation(projects.feature.marketsummary)
     implementation(projects.libs.designSystem)
 
