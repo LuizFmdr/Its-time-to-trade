@@ -14,3 +14,8 @@ This project utilizes [secrets gradle plugin](https://github.com/google/secrets-
 you need to provide your own API key from [RapidAPI](https://rapidapi.com/apidojo/api/yahoo-finance1).
 put you key in `local.properties`, the example file is in the root `secretes.defaults.properties` 
 
+
+
+
+https://github.com/LuizFmdr/Its-time-to-trade/assets/34826500/c658d876-15a6-4107-ae27-00eaf9504566
+
