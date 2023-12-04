@@ -44,6 +44,7 @@ detekt {
     source.setFrom(
         files(
             "$projectDir/app/src",
+            "$projectDir/feature/marketsummary/src",
         )
     )
 }
