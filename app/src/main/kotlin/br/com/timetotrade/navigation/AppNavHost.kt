@@ -19,7 +19,7 @@ fun AppNavHost(
         startDestination = "Main",
     ) {
         composable("Main") {
-           StockListRoute()
+            StockListRoute()
         }
     }
 }
