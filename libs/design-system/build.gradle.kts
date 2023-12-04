@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "br.com.br.com.timetotrade.getLibs.design_system"
+    namespace = "br.com.timetotrade.design_system"
 }
 
 dependencies {
