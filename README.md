@@ -2,7 +2,7 @@
 
 
 <p align="center">  
-🗡️ This project demonstrates modern Android development with Hilt, Coroutines, Flow, Jetpack Compose/ViewModel, and Material Design based on MVVM architecture.
+This project demonstrates modern Android development with Hilt, Coroutines, Flow, Jetpack Compose/ViewModel, and Material Design based on MVVM architecture.
 </p>
 </br>
 

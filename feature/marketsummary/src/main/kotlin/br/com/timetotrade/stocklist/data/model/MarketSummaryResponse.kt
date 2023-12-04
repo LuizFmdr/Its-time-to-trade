@@ -56,7 +56,7 @@ data class MarketResult(
     @SerialName("sourceInterval")
     val sourceInterval: Int,
     @SerialName("spark")
-    val spark: Spark,
+    val sparkResponse: SparkResponse,
     @SerialName("symbol")
     val symbol: String,
     @SerialName("tradeable")
@@ -82,7 +82,7 @@ data class RegularMarketTime(
 )
 
 @Serializable
-data class Spark(
+data class SparkResponse(
     @SerialName("chartPreviousClose")
     val chartPreviousClose: Double,
     @SerialName("close")

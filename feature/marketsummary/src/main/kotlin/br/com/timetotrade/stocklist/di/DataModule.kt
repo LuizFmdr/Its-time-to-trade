@@ -1,9 +1,9 @@
 package br.com.timetotrade.stocklist.di
 
-import br.com.timetotrade.stocklist.data.MarketSummaryDataSource
-import br.com.timetotrade.stocklist.data.MarketSummaryDataSourceImpl
+import br.com.timetotrade.stocklist.data.repository.MarketSummaryRepositoryImpl
+import br.com.timetotrade.stocklist.data.source.MarketSummaryDataSource
+import br.com.timetotrade.stocklist.data.source.MarketSummaryDataSourceImpl
 import br.com.timetotrade.stocklist.domain.MarketSummaryRepository
-import br.com.timetotrade.stocklist.domain.MarketSummaryRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
