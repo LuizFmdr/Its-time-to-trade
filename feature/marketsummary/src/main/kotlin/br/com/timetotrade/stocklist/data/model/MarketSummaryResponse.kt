@@ -84,19 +84,19 @@ data class RegularMarketTime(
 @Serializable
 data class SparkResponse(
     @SerialName("chartPreviousClose")
-    val chartPreviousClose: Double,
+    val chartPreviousClose: Double?,
     @SerialName("close")
-    val close: List<Double>,
+    val close: List<Double>?,
     @SerialName("dataGranularity")
-    val dataGranularity: Int,
+    val dataGranularity: Int?,
     @SerialName("end")
-    val end: Int,
+    val end: Int?,
     @SerialName("previousClose")
     val previousClose: Double,
     @SerialName("start")
-    val start: Int,
+    val start: Int?,
     @SerialName("symbol")
-    val symbol: String,
+    val symbol: String?,
     @SerialName("timestamp")
-    val timestamp: List<Int>
+    val timestamp: List<Int>?
 )

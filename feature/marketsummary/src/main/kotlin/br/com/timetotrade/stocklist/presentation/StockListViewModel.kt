@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class StockListViewModel @Inject constructor(
@@ -31,6 +32,7 @@ class StockListViewModel @Inject constructor(
                     handleSuccess(summary)
                 }
                 .catch {
+                    Timber.e(it)
                     setState { copy(isLoading = false, errorMessage = it.message) }
                 }
                 .collect()

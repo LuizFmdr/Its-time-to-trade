@@ -12,7 +12,7 @@ android {
 dependencies {
     implementation(projects.libs.network)
     implementation(projects.libs.designSystem)
-
+    implementation(libs.timber)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     debugImplementation(libs.androidx.ui.tooling)

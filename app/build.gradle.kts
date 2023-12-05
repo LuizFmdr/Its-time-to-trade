@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.retrofit)
     implementation(libs.coil)
+    implementation(libs.timber)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.coroutines.android)

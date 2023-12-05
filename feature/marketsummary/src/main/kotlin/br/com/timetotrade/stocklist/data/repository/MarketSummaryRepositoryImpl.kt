@@ -16,6 +16,8 @@ class MarketSummaryRepositoryImpl @Inject constructor(
     override fun getMarketSummary(): Flow<List<MarketSummary>> {
         return dataSource.getMarketSummary().map {
             it.map { result ->
+                val closeList = result.sparkResponse.close?.map { v -> v.toFloat() } ?: emptyList()
+
                 MarketSummary(
                     symbol = result.symbol,
                     fullExchangeName = result.fullExchangeName,
@@ -26,9 +28,10 @@ class MarketSummaryRepositoryImpl @Inject constructor(
                         fmt = result.regularMarketPreviousClose.fmt
                     ),
                     spark = Spark(
-                        close = result.sparkResponse.close.map { close ->
-                            close.toFloat()
-                        }
+                        closeZipList = closeList.zipWithNext(),
+                        closeList = closeList,
+                        max = closeList.maxOrNull() ?: 0F,
+                        min = closeList.minOrNull() ?: 0F,
                     ),
                 )
             }

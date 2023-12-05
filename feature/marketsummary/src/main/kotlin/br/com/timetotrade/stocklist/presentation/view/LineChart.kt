@@ -8,22 +8,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import br.com.timetotrade.desingsystem.LightCarmin
 import br.com.timetotrade.desingsystem.LightOlive
+import br.com.timetotrade.stocklist.domain.model.Spark
 
 @Composable
-fun LineChart(modifier: Modifier = Modifier, list: List<Float>) {
-    val zipList: List<Pair<Float, Float>> = list.zipWithNext()
+fun LineChart(modifier: Modifier = Modifier, spark: Spark) {
 
     Row(modifier = modifier) {
-        val max = list.max()
-        val min = list.min()
 
         val lineColor =
-            if (list.last() > list.first()) LightOlive else LightCarmin
+            if (spark.closeList.last() > spark.closeList.first()) LightOlive else LightCarmin
 
-        for (pair in zipList) {
+        for (pair in spark.closeZipList) {
 
-            val fromValuePercentage = getValuePercentageForRange(pair.first, max, min)
-            val toValuePercentage = getValuePercentageForRange(pair.second, max, min)
+            val fromValuePercentage = getValuePercentageForRange(pair.first, spark.max, spark.min)
+            val toValuePercentage = getValuePercentageForRange(pair.second, spark.max, spark.min)
 
             Canvas(
                 modifier = Modifier

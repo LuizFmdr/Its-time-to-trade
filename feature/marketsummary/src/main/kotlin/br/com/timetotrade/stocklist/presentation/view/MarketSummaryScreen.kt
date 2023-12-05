@@ -145,9 +145,11 @@ fun SummaryItem(marketSummary: MarketSummary) {
                 ),
             )
         }
-        LineChart(
-            list = marketSummary.spark.close,
-        )
+        if (marketSummary.spark.closeList.isNotEmpty()) {
+            LineChart(
+                spark = marketSummary.spark,
+            )
+        }
     }
 }
 
@@ -178,63 +180,19 @@ private fun createMock(): List<MarketSummary> {
                     fmt = "4,400.00",
                 ),
                 spark = Spark(
-                    close = listOf(
+                    closeList = listOf(
                         45.66F,
                         45.66F,
                         46.08F,
                         50.66F,
-                    )
-                )
-            ), MarketSummary(
-                symbol = "RTY=F",
-                fullExchangeName = "CME",
-                exchange = "CME",
-                shortName = "Russell 2000 Futures",
-                regularMarketPreviousClose = RegularMarketValue(
-                    raw = 4400.0,
-                    fmt = "4,400.00",
-                ),
-                spark = Spark(
-                    close = listOf(
-                        45.66F,
-                        45.66F,
-                        46.08F,
-                        50.66F,
-                    )
-                )
-            ), MarketSummary(
-                symbol = "NQ=F",
-                fullExchangeName = "CME",
-                exchange = "CME",
-                shortName = "Nasdaq Futures",
-                regularMarketPreviousClose = RegularMarketValue(
-                    raw = 4400.0,
-                    fmt = "4,400.00",
-                ),
-                spark = Spark(
-                    close = listOf(
-                        45.66F,
-                        45.66F,
-                        46.08F,
-                        50.66F,
-                    )
-                )
-            ), MarketSummary(
-                symbol = "YM=F",
-                fullExchangeName = "CME",
-                exchange = "CME",
-                shortName = "Dow Futures",
-                regularMarketPreviousClose = RegularMarketValue(
-                    raw = 4400.0,
-                    fmt = "4,400.00",
-                ),
-                spark = Spark(
-                    close = listOf(
-                        45.66F,
-                        45.66F,
-                        46.08F,
-                        50.66F,
-                    )
+                    ),
+                    closeZipList = listOf(
+                        45.66F to 45.66F,
+                        45.66F to 46.08F,
+                        46.08F to 50.66F,
+                    ),
+                    max = 50.66F,
+                    min = 45.66F,
                 )
             )
         )

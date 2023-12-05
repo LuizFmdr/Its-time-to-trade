@@ -10,7 +10,10 @@ data class MarketSummary(
 )
 
 data class Spark(
-    val close: List<Float>
+    val closeZipList: List<Pair<Float, Float>>,
+    val closeList: List<Float>,
+    val max: Float,
+    val min: Float,
 )
 
 data class RegularMarketValue(
