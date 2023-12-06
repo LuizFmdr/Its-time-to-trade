@@ -8,7 +8,7 @@ interface MarketService {
 
     @GET("market/v2/get-summary")
     suspend fun getMarketSummary(
-        @Query("region") region: String = "US",
+        @Query("region") region: String,
     ): MarketSummaryResponse
 
 }

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MarketSummaryRepository {
 
-    fun getMarketSummary(): Flow<List<MarketSummary>>
+    fun getMarketSummary(selectedMarket: String): Flow<List<MarketSummary>>
 }

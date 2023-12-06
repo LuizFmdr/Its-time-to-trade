@@ -3,7 +3,6 @@ package br.com.timetotrade.stocklist.data.source
 import br.com.timetotrade.stocklist.data.MarketService
 import br.com.timetotrade.stocklist.data.model.MarketResult
 import javax.inject.Inject
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -12,19 +11,19 @@ const val UPDATE_INTERVAL = 8000L
 
 interface MarketSummaryDataSource {
 
-    fun getMarketSummary(): Flow<List<MarketResult>>
+    fun getMarketSummary(selectedMarket: String): Flow<List<MarketResult>>
 }
 
 class MarketSummaryDataSourceImpl @Inject constructor(
     private val marketService: MarketService
 ) : MarketSummaryDataSource {
 
-    override fun getMarketSummary(): Flow<List<MarketResult>> {
+    override fun getMarketSummary(selectedMarket: String): Flow<List<MarketResult>> {
         return flow {
-            while (true) {
-                emit(marketService.getMarketSummary().marketSummaryAndSparkResponse.marketResultList)
-                delay(UPDATE_INTERVAL)
-            }
+           // while (true) {
+                emit(marketService.getMarketSummary(selectedMarket).marketSummaryAndSparkResponse.marketResultList)
+               // delay(UPDATE_INTERVAL)
+            //}
         }
     }
 }

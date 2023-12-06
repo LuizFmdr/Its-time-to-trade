@@ -13,12 +13,15 @@ class MarketSummaryRepositoryImpl @Inject constructor(
     private val dataSource: MarketSummaryDataSource
 ) : MarketSummaryRepository {
 
-    override fun getMarketSummary(): Flow<List<MarketSummary>> {
-        return dataSource.getMarketSummary().map {
+    override fun getMarketSummary(selectedMarket: String): Flow<List<MarketSummary>> {
+        return dataSource.getMarketSummary(selectedMarket).map {
             it.map { result ->
                 val closeList = result.sparkResponse.close?.map { v -> v.toFloat() } ?: emptyList()
-
+                val lastClose = result.sparkResponse.close?.lastOrNull() ?: 0.0
                 MarketSummary(
+                    formattedName = "${result.shortName} (${result.symbol})",
+                    currentPoints = lastClose,
+                    todayComparedToPreviousClose = lastClose - result.regularMarketPreviousClose.raw,
                     symbol = result.symbol,
                     fullExchangeName = result.fullExchangeName,
                     exchange = result.exchange,
