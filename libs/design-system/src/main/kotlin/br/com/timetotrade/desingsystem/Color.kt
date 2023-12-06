@@ -70,6 +70,7 @@ val seed = Color(0xFF1B1C1E)
 
 val PrimaryDark = Color(0xFF000000)
 val PrimaryLight = Color(0xFF1A1A1A)
+val PrimaryDarkVariant = Color(0xFF191919)
 val PrimaryHighlight = Color(0xFF2ef8a0)
 val SecondaryDark = Color(0xFF1F6E8C)
 val SecondaryLight = Color(0xFFf6f6f6)

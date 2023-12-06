@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -51,16 +52,20 @@ import br.com.timetotrade.desingsystem.PrimaryHighlight
 import br.com.timetotrade.desingsystem.PrimaryLight
 import br.com.timetotrade.desingsystem.SecondaryLight
 import br.com.timetotrade.desingsystem.TimeToTradeTheme
+import br.com.timetotrade.feature.market.summary.R
+import br.com.timetotrade.stocklist.domain.model.MARKET_LIST
 import br.com.timetotrade.stocklist.domain.model.MarketSummary
 import br.com.timetotrade.stocklist.domain.model.RegularMarketValue
 import br.com.timetotrade.stocklist.domain.model.Spark
+import br.com.timetotrade.stocklist.domain.model.selectedMarketCode
 import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiIntent
 import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiIntent.OnMarketSelect
+import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.StockListState
 
 @Composable
 fun MarketSummaryScreen(
     loading: Boolean = false,
-    marketSummaryList: List<MarketSummary> = listOf(),
+    state: StockListState,
     listState: LazyListState = rememberLazyListState(),
     intentChannel: (MarketSummaryUiIntent) -> Unit = {},
 ) {
@@ -77,7 +82,14 @@ fun MarketSummaryScreen(
                 containerColor = PrimaryLight,
                 onClick = { intentChannel(OnMarketSelect) },
                 icon = { Icon(Icons.Filled.ShowChart, "Extended floating action button.") },
-                text = { Text(text = "US Market") },
+                text = {
+                    Text(
+                        text = stringResource(
+                            R.string.summary_fab_text,
+                            state.availableMarketList.selectedMarketCode
+                        )
+                    )
+                },
             )
         },
         topBar = { Search() },
@@ -94,7 +106,7 @@ fun MarketSummaryScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                items(marketSummaryList) { market ->
+                items(state.marketSummaryList) { market ->
                     SummaryItem(marketSummary = market)
                 }
             }
@@ -231,7 +243,11 @@ fun DefaultPreviewDark() {
             modifier = Modifier.fillMaxSize()
         ) {
             MarketSummaryScreen(
-                loading = false, marketSummaryList = createMock()
+                loading = false,
+                state = StockListState(
+                    availableMarketList = MARKET_LIST,
+                    marketSummaryList = createMock(),
+                )
             )
         }
     }

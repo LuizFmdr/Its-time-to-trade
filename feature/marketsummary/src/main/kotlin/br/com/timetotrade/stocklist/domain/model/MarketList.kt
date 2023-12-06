@@ -10,5 +10,5 @@ val MARKET_LIST = listOf(
     AvailableMarket(code, code == DEFAULT_MARKET)
 }
 
-val List<AvailableMarket>.selectedMarket: String
-    get() = MARKET_LIST.first { it.isSelected }.code
+val List<AvailableMarket>.selectedMarketCode: String
+    get() = this.first { it.isSelected }.code

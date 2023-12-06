@@ -1,16 +1,21 @@
 package br.com.timetotrade.stocklist
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.Icons.Filled
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
@@ -21,16 +26,27 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import br.com.timetotrade.desingsystem.PrimaryDarkVariant
+import br.com.timetotrade.desingsystem.SecondaryLight
+import br.com.timetotrade.desingsystem.TertiaryDark
+import br.com.timetotrade.desingsystem.TimeToTradeTheme
+import br.com.timetotrade.stocklist.domain.model.AvailableMarket
+import br.com.timetotrade.stocklist.domain.model.MARKET_LIST
 import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel
 import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiAction.HideMarketList
 import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiAction.ShowMarketList
+import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiIntent
+import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiIntent.OnBackPress
 import br.com.timetotrade.stocklist.presentation.MarketSummaryViewModel.MarketSummaryUiIntent.OnMarketSelected
 import br.com.timetotrade.stocklist.presentation.view.MarketSummaryScreen
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MarketSummaryRoute(viewModel: MarketSummaryViewModel = hiltViewModel()) {
 
@@ -40,40 +56,71 @@ fun MarketSummaryRoute(viewModel: MarketSummaryViewModel = hiltViewModel()) {
     val bottomSheetState =
         androidx.compose.material.rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
 
-    ModalBottomSheetLayout(sheetState = bottomSheetState, sheetContent = {
-        LazyHorizontalGrid(rows = GridCells.Fixed(3)) {
-            this.items(state.availableMarketList) { market ->
-                FilterChip(
-                    onClick = { viewModel.handleIntents(OnMarketSelected(market)) },
-                    label = {
-                        Text(market.code)
-                    },
-                    selected = market.isSelected,
-                    leadingIcon = {
-                        if (market.isSelected) {
-                            Icon(
-                                imageVector = Icons.Filled.Done,
-                                contentDescription = "Done icon",
-                                modifier = Modifier.size(FilterChipDefaults.IconSize)
-                            )
-                        }
-                    }
-                )
-            }
-        }
-    }) {
+    ModalBottomSheetLayout(
+        sheetState = bottomSheetState,
+        modifier = Modifier.fillMaxWidth(),
+        sheetBackgroundColor = PrimaryDarkVariant,
+        sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+        sheetContent = {
+            BottomSheetContent(state.availableMarketList, viewModel::handleIntents)
+        }) {
         MarketSummaryScreen(
             listState = listState,
-            loading = state.isLoading,
-            marketSummaryList = state.marketSummaryList,
+            state = state,
             intentChannel = viewModel::handleIntents
         )
+    }
+
+    BackHandler {
+        viewModel.handleIntents(OnBackPress(bottomSheetState.isVisible))
     }
 
     ObserveActions(
         viewModel = viewModel,
         bottomSheetState = bottomSheetState
     )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+private fun BottomSheetContent(
+    availableMarketList: List<AvailableMarket>,
+    intentChannel: (MarketSummaryUiIntent) -> Unit = {},
+) {
+    FlowRow(
+        modifier = Modifier.padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        maxItemsInEachRow = 4
+    ) {
+        availableMarketList.map { market ->
+            FilterChip(
+                modifier = Modifier.weight(1f),
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = TertiaryDark
+                ),
+                onClick = { intentChannel(OnMarketSelected(market)) },
+                label = {
+                    Text(
+                        market.code,
+                        style = TextStyle(
+                            color = SecondaryLight
+                        ),
+                    )
+                },
+                selected = market.isSelected,
+                leadingIcon = {
+                    if (market.isSelected) {
+                        Icon(
+                            imageVector = Filled.Done,
+                            contentDescription = "Done icon",
+                            modifier = Modifier.size(FilterChipDefaults.IconSize)
+                        )
+                    }
+                }
+            )
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -95,6 +142,21 @@ private fun ObserveActions(
                     scope.launch { bottomSheetState.hide() }
                 }
             }
+        }
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun DefaultPreviewDark() {
+    TimeToTradeTheme {
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            BottomSheetContent(
+                availableMarketList = MARKET_LIST,
+                intentChannel = {}
+            )
         }
     }
 }
