@@ -21,7 +21,10 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 
-include(":feature:marketsummary")
+include(
+    ":feature:marketsummary",
+    ":feature:search"
+)
 
 include(
     ":libs:design-system",

@@ -50,18 +50,21 @@ secrets {
 
 dependencies {
 
+    implementation(projects.feature.marketsummary)
+    implementation(projects.libs.designSystem)
+    implementation(projects.feature.search)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.retrofit)
     implementation(libs.coil)
     implementation(libs.timber)
     implementation(libs.androidx.compose.navigation)
+    implementation(libs.accompanist.systemui.controller)
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.core.splashscreen)
-    implementation(projects.feature.marketsummary)
-    implementation(projects.libs.designSystem)
 
     debugImplementation(libs.leakcanary)
     testImplementation(libs.junit)

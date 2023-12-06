@@ -1,25 +1,23 @@
 package br.com.timetotrade.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.timetotrade.stocklist.MarketSummaryRoute
+import br.com.timetotrade.marketsummary.marketSummaryRoute
+import br.com.timetotrade.marketsummary.marketSummaryScreen
+import br.com.timetotrade.search.navigation.navigateSearch
+import br.com.timetotrade.search.navigation.searchScreen
 
 @Composable
-fun AppNavHost(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-) {
+fun AppNavHost() {
+
+    val navController = rememberNavController()
+
     NavHost(
-        modifier = modifier,
         navController = navController,
-        startDestination = "Summary",
+        startDestination = marketSummaryRoute,
     ) {
-        composable("Summary") {
-            MarketSummaryRoute()
-        }
+        marketSummaryScreen(navController::navigateSearch)
+        searchScreen()
     }
 }
