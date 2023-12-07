@@ -23,6 +23,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
+          distribution: 'zulu'
           java-version: 17
 
       - name: Setup Gradle
@@ -30,9 +31,6 @@ jobs:
 
       - name: Run Unit Tests
         run: ./gradlew test
-
-      - name: Build Project
-        run: ./gradlew assemble
 
       - name: Detekt Verification
         run: ./gradlew detekt
