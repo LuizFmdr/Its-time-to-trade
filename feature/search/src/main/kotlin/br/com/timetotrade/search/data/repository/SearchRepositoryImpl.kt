@@ -22,6 +22,7 @@ class SearchRepositoryImpl @Inject constructor(
                         exchDisp = response.exchDisp,
                         industry = response.industry,
                         exchange = response.exchange,
+                        score = response.score
                     )
                 }
             }

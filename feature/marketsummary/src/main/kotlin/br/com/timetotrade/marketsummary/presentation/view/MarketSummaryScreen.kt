@@ -115,6 +115,7 @@ fun MarketSummaryScreen(
 
 @Composable
 fun Search(onFocusChange: (Boolean) -> Unit) {
+
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()

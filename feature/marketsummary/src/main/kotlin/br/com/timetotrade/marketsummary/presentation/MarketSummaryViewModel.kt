@@ -78,7 +78,11 @@ class MarketSummaryViewModel @Inject constructor(
                 }
             }
 
-            is OnSearchFocusChanged -> sendAction(GoToSearch)
+            is OnSearchFocusChanged -> {
+                if (intent.hasFocus) {
+                    sendAction(GoToSearch)
+                }
+            }
         }
     }
 

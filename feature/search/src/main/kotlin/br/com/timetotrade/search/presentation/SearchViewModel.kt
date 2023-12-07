@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.timetotrade.common.network.di.IoDispatcher
 import br.com.timetotrade.common.state.StateViewModel
 import br.com.timetotrade.search.domain.SearchRepository
+import br.com.timetotrade.search.domain.model.SearchResult
 import br.com.timetotrade.search.presentation.SearchViewModel.SearchState
 import br.com.timetotrade.search.presentation.SearchViewModel.SearchUiAction
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,8 +13,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -24,25 +25,36 @@ class SearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
-     fun onSearchTextChanged(searchText: String) {
-        searchJob?.cancel()
-        searchJob = viewModelScope.launch {
-            delay(1000)
-            searchStock(searchText)
+    fun onSearchTextChanged(searchText: String) {
+        setState { copy(searchText = searchText) }
+        if (searchText.isNotEmpty()) {
+            searchJob?.cancel()
+            searchJob = viewModelScope.launch {
+                delay(1000)
+                searchStock(searchText)
+            }
         }
     }
 
     private fun searchStock(searchText: String) {
         viewModelScope.launch(ioDispatcher) {
             repository.search(searchText)
-                .onStart {
-
-                }
                 .catch {
-
+                    Timber.e("Search catch", it)
+                    setState {
+                        copy(
+                            resultList = emptyList(),
+                            hasAnyResult = false
+                        )
+                    }
                 }
                 .collect {
-
+                    setState {
+                        copy(
+                            resultList = it,
+                            hasAnyResult = it.isNotEmpty() && searchText.isNotEmpty()
+                        )
+                    }
                 }
         }
     }
@@ -54,16 +66,9 @@ class SearchViewModel @Inject constructor(
 
     data class SearchState(
         val searchText: String = "",
-        val isLoading: Boolean = false,
-        val errorMessage: String? = null
+        val resultList: List<SearchResult> = emptyList(),
+        val hasAnyResult: Boolean = false,
     )
 
-    sealed interface SearchUiAction {
-
-    }
-
-    sealed interface MarketSummaryUiIntent {
-        data class SearchStock(val searchText: String) : MarketSummaryUiIntent
-        data class OnSearchFocusChanged(val hasFocus: Boolean) : MarketSummaryUiIntent
-    }
+    sealed interface SearchUiAction
 }

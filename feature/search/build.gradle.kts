@@ -19,5 +19,8 @@ dependencies {
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.hilt.navigation.compose)
+
     debugImplementation(libs.androidx.ui.tooling)
+
+    testImplementation(libs.junit)
 }
