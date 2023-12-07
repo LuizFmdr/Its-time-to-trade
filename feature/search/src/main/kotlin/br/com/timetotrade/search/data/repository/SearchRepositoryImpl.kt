@@ -16,11 +16,11 @@ class SearchRepositoryImpl @Inject constructor(
             .map {
                 it.map { response ->
                     SearchResult(
-                        shortName = response.shortname,
-                        longName = response.longname,
-                        symbol = response.symbol,
+                        shortName = response.shortname.orEmpty(),
+                        longName = response.longname ?: response.shortname.orEmpty(),
+                        symbol = response.symbol.orEmpty(),
                         exchDisp = response.exchDisp,
-                        industry = response.industry,
+                        industry = response.industry.orEmpty(),
                         exchange = response.exchange,
                         score = response.score
                     )

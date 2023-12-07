@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.timetotrade.android.library)
     alias(libs.plugins.timetotrade.android.hilt)
+    alias(libs.plugins.timetotrade.android.moshi)
     alias(libs.plugins.secrets)
     id("kotlinx-serialization")
 }
@@ -18,10 +19,9 @@ secrets {
 }
 
 dependencies {
-    api(libs.retrofit)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.coroutines.android)
-    api(libs.retrofit.kotlin.serialization)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.core.ktx)
+    api(libs.retrofit.moshi.converter)
+    api(libs.retrofit)
 }

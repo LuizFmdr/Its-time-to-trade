@@ -1,6 +1,7 @@
 package br.com.timetotrade.marketsummary.presentation.view
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -59,6 +60,7 @@ import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.Mark
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.MarketSummaryUiIntent.OnSearchFocusChanged
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.StockListState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MarketSummaryScreen(
     loading: Boolean = false,
@@ -106,8 +108,11 @@ fun MarketSummaryScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                items(state.marketSummaryList) { market ->
-                    SummaryItem(marketSummary = market)
+                items(state.marketSummaryList, key = { it.formattedName }) { market ->
+                    SummaryItem(
+                        Modifier.animateItemPlacement(),
+                        marketSummary = market
+                    )
                 }
             }
         }
@@ -156,9 +161,9 @@ fun ScreenLoading(show: Boolean = false) {
 }
 
 @Composable
-fun SummaryItem(marketSummary: MarketSummary) {
+fun SummaryItem(modifier: Modifier, marketSummary: MarketSummary) {
     OutlinedCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = PrimaryDark,
         ),

@@ -37,6 +37,10 @@ gradlePlugin {
             id = "timetotrade.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidMoshi") {
+            id = "timetotrade.android.moshi"
+            implementationClass = "AndroidMoshiConventionPlugin"
+        }
         register("androidLibraryCompose") {
             id = "timetotrade.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"

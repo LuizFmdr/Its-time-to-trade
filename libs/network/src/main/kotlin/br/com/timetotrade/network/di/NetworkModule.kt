@@ -2,18 +2,16 @@ package br.com.timetotrade.network.di
 
 import br.com.timetotrade.network.BuildConfig
 import br.com.timetotrade.network.interceptor.AuthInterceptor
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import kotlinx.serialization.json.Json
 import okhttp3.Call
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -38,13 +36,11 @@ object NetworkModule {
     fun provideRetrofit(
         okhttpCallFactory: Call.Factory
     ): Retrofit {
-        val contentType = "application/json".toMediaType()
-        val json = Json { ignoreUnknownKeys = true }
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .callFactory(okhttpCallFactory)
             .addConverterFactory(
-              json.asConverterFactory(contentType)
+                MoshiConverterFactory.create()
             )
             .build()
     }

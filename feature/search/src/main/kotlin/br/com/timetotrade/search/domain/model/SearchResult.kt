@@ -7,5 +7,5 @@ data class SearchResult(
     val exchDisp: String,
     val industry: String,
     val exchange: String,
-    val score: Int,
+    val score: Double,
 )

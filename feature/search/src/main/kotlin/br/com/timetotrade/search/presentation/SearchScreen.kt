@@ -1,6 +1,7 @@
 package br.com.timetotrade.search.presentation
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -43,8 +44,10 @@ import br.com.timetotrade.desingsystem.PrimaryHighlight
 import br.com.timetotrade.desingsystem.PrimaryLight
 import br.com.timetotrade.desingsystem.SecondaryLight
 import br.com.timetotrade.desingsystem.TimeToTradeTheme
+import br.com.timetotrade.search.domain.model.SearchResult
 import br.com.timetotrade.search.presentation.SearchViewModel.SearchState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchScreen(
     searchState: SearchState,
@@ -65,62 +68,70 @@ fun SearchScreen(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(searchState.resultList) { item ->
-                OutlinedCard(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = PrimaryDark,
+            items(searchState.resultList, key = { it.hashCode() }) { item ->
+                CardItem(
+                    Modifier.animateItemPlacement(),
+                    item
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun CardItem(modifier: Modifier, item: SearchResult) {
+    OutlinedCard(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = PrimaryDark,
+        ),
+        border = BorderStroke(1.dp, PrimaryLight),
+    ) {
+        Column(
+            Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = item.symbol,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.W500,
+                        color = PrimaryHighlight,
                     ),
-                    border = BorderStroke(1.dp, PrimaryLight),
-                ) {
-                    Column(
-                        Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Row(
-                            Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = item.symbol,
-                                style = TextStyle(
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.W500,
-                                    color = PrimaryHighlight,
-                                ),
-                            )
-                            Text(
-                                text = item.exchange,
-                                style = TextStyle(
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.W500,
-                                    color = PrimaryHighlight,
-                                ),
-                            )
-                        }
-                        Row(
-                            Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = item.longName,
-                                style = TextStyle(
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.W400,
-                                    color = SecondaryLight,
-                                ),
-                            )
-                            Text(
-                                text = item.exchDisp,
-                                style = TextStyle(
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.W400,
-                                    color = SecondaryLight,
-                                ),
-                            )
-                        }
-                    }
-                }
+                )
+                Text(
+                    text = item.exchange,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.W500,
+                        color = PrimaryHighlight,
+                    ),
+                )
+            }
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = item.longName,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.W400,
+                        color = SecondaryLight,
+                    ),
+                )
+                Text(
+                    text = item.exchDisp,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.W400,
+                        color = SecondaryLight,
+                    ),
+                )
             }
         }
     }
@@ -179,7 +190,7 @@ fun DefaultPreviewDark() {
                             exchDisp = "NYSE",
                             industry = "Software - Infrastructure",
                             exchange = "NYQ",
-                            score = 157079,
+                            score = 157079.0,
                         )
                     )
                 }.flatten()
