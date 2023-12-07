@@ -1,6 +1,8 @@
 package br.com.timetotrade.marketsummary.presentation
 
 import androidx.lifecycle.viewModelScope
+import br.com.timetotrade.common.network.di.IoDispatcher
+import br.com.timetotrade.common.state.StateViewModel
 import br.com.timetotrade.marketsummary.domain.MarketSummaryRepository
 import br.com.timetotrade.marketsummary.domain.model.AvailableMarket
 import br.com.timetotrade.marketsummary.domain.model.MARKET_LIST
@@ -17,10 +19,9 @@ import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.Mark
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.StockListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -28,7 +29,9 @@ import timber.log.Timber
 
 @HiltViewModel
 class MarketSummaryViewModel @Inject constructor(
-    private val repository: MarketSummaryRepository
+    private val repository: MarketSummaryRepository,
+    @IoDispatcher
+    private val ioDispatcher: CoroutineDispatcher
 ) : StateViewModel<StockListState, MarketSummaryUiAction>(
     StockListState()
 ) {
@@ -38,9 +41,8 @@ class MarketSummaryViewModel @Inject constructor(
     }
 
     private fun getStocks() {
-        viewModelScope.launch {
+        viewModelScope.launch(ioDispatcher) {
             repository.getMarketSummary(stateValue.marketList.currentMarketCode)
-                .flowOn(Dispatchers.IO)
                 .onStart { setState { copy(isLoading = true) } }
                 .onEach { summary ->
                     handleSuccess(summary)

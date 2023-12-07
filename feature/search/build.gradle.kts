@@ -12,6 +12,7 @@ android {
 dependencies {
     implementation(projects.libs.network)
     implementation(projects.libs.designSystem)
+    implementation(projects.libs.common)
     implementation(libs.compose.material)
     implementation(libs.timber)
     implementation(libs.androidx.compose.lifecycle)

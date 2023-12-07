@@ -1,4 +1,4 @@
-package br.com.timetotrade.marketsummary.presentation
+package br.com.timetotrade.common.state
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +16,7 @@ abstract class StateViewModel<UiState, UiAction>(initialState: UiState) : ViewMo
     private val _action = MutableSharedFlow<UiAction>()
     val action: SharedFlow<UiAction> = _action
 
-    val stateValue: UiState
+    protected val stateValue: UiState
         get() = state.value
 
     protected fun setState(block: UiState.() -> UiState) {

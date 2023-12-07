@@ -1,10 +1,10 @@
 <h1 align="center">It's Time To Trade</h1>
 
+[![All packages CI](https://github.com/LuizFmdr/Its-time-to-trade/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/LuizFmdr/Its-time-to-trade/actions/workflows/build.yml)
 
 <p align="center">  
 This project demonstrates modern Android development with Hilt, Coroutines, Flow, Jetpack Compose/ViewModel, and Material Design based on MVVM architecture.
 </p>
-</br>
 
 This android application that display the summary of the stock market and the details of each stock.
 
@@ -17,5 +17,3 @@ put you key in `local.properties`, the example file is in the root `secretes.def
 
 
 <img align="center" src="https://github.com/LuizFmdr/Its-time-to-trade/assets/34826500/46cdb7b2-00d9-4a3c-946d-b2909907778b" width="300"/>
-
-

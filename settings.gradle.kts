@@ -29,4 +29,5 @@ include(
 include(
     ":libs:design-system",
     ":libs:network",
+    ":libs:common",
 )
