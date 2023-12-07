@@ -1,102 +1,90 @@
 package br.com.timetotrade.marketsummary.data.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class MarketSummaryResponse(
-    @SerialName("marketSummaryAndSparkResponse")
+    @Json(name = "marketSummaryAndSparkResponse")
     val marketSummaryAndSparkResponse: MarketSummaryAndSparkResponse
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class MarketSummaryAndSparkResponse(
-    @SerialName("result")
+    @Json(name = "result")
     val marketResultList: List<MarketResult>
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class MarketResult(
-    @SerialName("cryptoTradeable")
+    @Json(name = "cryptoTradeable")
     val cryptoTradeable: Boolean,
-    @SerialName("customPriceAlertConfidence")
+    @Json(name = "customPriceAlertConfidence")
     val customPriceAlertConfidence: String,
-    @SerialName("exchange")
+    @Json(name = "exchange")
     val exchange: String,
-    @SerialName("exchangeDataDelayedBy")
-    val exchangeDataDelayedBy: Int,
-    @SerialName("exchangeTimezoneName")
-    val exchangeTimezoneName: String,
-    @SerialName("exchangeTimezoneShortName")
-    val exchangeTimezoneShortName: String,
-    @SerialName("firstTradeDateMilliseconds")
-    val firstTradeDateMilliseconds: Long,
-    @SerialName("fullExchangeName")
+    @Json(name = "fullExchangeName")
     val fullExchangeName: String,
-    @SerialName("gmtOffSetMilliseconds")
-    val gmtOffSetMilliseconds: Int,
-    @SerialName("language")
-    val language: String,
-    @SerialName("market")
+    @Json(name = "market")
     val market: String,
-    @SerialName("marketState")
+    @Json(name = "marketState")
     val marketState: String,
-    @SerialName("priceHint")
+    @Json(name = "priceHint")
     val priceHint: Int,
-    @SerialName("quoteType")
+    @Json(name = "quoteType")
     val quoteType: String,
-    @SerialName("region")
+    @Json(name = "region")
     val region: String,
-    @SerialName("regularMarketPreviousClose")
+    @Json(name = "regularMarketPreviousClose")
     val regularMarketPreviousClose: RegularMarketPreviousClose,
-    @SerialName("regularMarketTime")
+    @Json(name = "regularMarketTime")
     val regularMarketTime: RegularMarketTime,
-    @SerialName("shortName")
+    @Json(name = "shortName")
     val shortName: String,
-    @SerialName("sourceInterval")
+    @Json(name = "sourceInterval")
     val sourceInterval: Int,
-    @SerialName("spark")
+    @Json(name = "spark")
     val sparkResponse: SparkResponse,
-    @SerialName("symbol")
+    @Json(name = "symbol")
     val symbol: String,
-    @SerialName("tradeable")
+    @Json(name = "tradeable")
     val tradeable: Boolean,
-    @SerialName("triggerable")
+    @Json(name = "triggerable")
     val triggerable: Boolean
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class RegularMarketPreviousClose(
-    @SerialName("fmt")
+    @Json(name = "fmt")
     val fmt: String,
-    @SerialName("raw")
+    @Json(name = "raw")
     val raw: Double
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class RegularMarketTime(
-    @SerialName("fmt")
+    @Json(name = "fmt")
     val fmt: String,
-    @SerialName("raw")
+    @Json(name = "raw")
     val raw: Int
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class SparkResponse(
-    @SerialName("chartPreviousClose")
+    @Json(name = "chartPreviousClose")
     val chartPreviousClose: Double?,
-    @SerialName("close")
+    @Json(name = "close")
     val close: List<Double>?,
-    @SerialName("dataGranularity")
+    @Json(name = "dataGranularity")
     val dataGranularity: Int?,
-    @SerialName("end")
+    @Json(name = "end")
     val end: Int?,
-    @SerialName("previousClose")
+    @Json(name = "previousClose")
     val previousClose: Double,
-    @SerialName("start")
+    @Json(name = "start")
     val start: Int?,
-    @SerialName("symbol")
+    @Json(name = "symbol")
     val symbol: String?,
-    @SerialName("timestamp")
+    @Json(name = "timestamp")
     val timestamp: List<Int>?
 )

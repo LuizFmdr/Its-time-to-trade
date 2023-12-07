@@ -30,7 +30,7 @@ class SearchViewModel @Inject constructor(
         if (searchText.isNotEmpty()) {
             searchJob?.cancel()
             searchJob = viewModelScope.launch {
-                delay(1000)
+                delay(600)
                 searchStock(searchText)
             }
         }

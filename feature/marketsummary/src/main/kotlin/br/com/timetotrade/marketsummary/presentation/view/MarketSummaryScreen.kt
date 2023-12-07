@@ -1,5 +1,7 @@
 package br.com.timetotrade.marketsummary.presentation.view
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,11 +21,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShowChart
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -58,6 +60,7 @@ import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.Mark
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.MarketSummaryUiIntent.OnSearchFocusChanged
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.StockListState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MarketSummaryScreen(
     loading: Boolean = false,
@@ -105,8 +108,11 @@ fun MarketSummaryScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                items(state.marketSummaryList) { market ->
-                    SummaryItem(marketSummary = market)
+                items(state.marketSummaryList, key = { it.formattedName }) { market ->
+                    SummaryItem(
+                        Modifier.animateItemPlacement(),
+                        marketSummary = market
+                    )
                 }
             }
         }
@@ -155,11 +161,13 @@ fun ScreenLoading(show: Boolean = false) {
 }
 
 @Composable
-fun SummaryItem(marketSummary: MarketSummary) {
-    Card(
+fun SummaryItem(modifier: Modifier, marketSummary: MarketSummary) {
+    OutlinedCard(
+        modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = PrimaryLight,
-        )
+            containerColor = PrimaryDark,
+        ),
+        border = BorderStroke(1.dp, PrimaryLight),
     ) {
         Row {
             Column(

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.timetotrade.android.library)
     alias(libs.plugins.timetotrade.android.library.compose)
     alias(libs.plugins.timetotrade.android.hilt)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.timetotrade.android.moshi)
 }
 
 android {
@@ -20,6 +20,5 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     debugImplementation(libs.androidx.ui.tooling)
-
     testImplementation(libs.junit)
 }

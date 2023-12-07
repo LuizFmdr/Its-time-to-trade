@@ -1,52 +1,44 @@
 package br.com.timetotrade.search.data.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class SearchResponse(
-    @SerialName("count")
+    @Json(name = "count")
     val count: Int,
-    @SerialName("quotes")
+    @Json(name = "quotes")
     val quoteResponses: List<QuoteResponse>,
 )
 
-@Serializable
+@JsonClass(generateAdapter = true)
 data class QuoteResponse(
-    @SerialName("dispSecIndFlag")
-    val dispSecIndFlag: Boolean?,
-    @SerialName("exchDisp")
+    @Json(name = "exchDisp")
     val exchDisp: String,
-    @SerialName("exchange")
+    @Json(name = "exchange")
     val exchange: String,
-    @SerialName("index")
+    @Json(name = "index")
     val index: String,
-    @SerialName("industry")
-    val industry: String,
-    @SerialName("industryDisp")
-    val industryDisp: String,
-    @SerialName("isYahooFinance")
+    @Json(name = "industry")
+    val industry: String?,
+    @Json(name = "industryDisp")
+    val industryDisp: String?,
+    @Json(name = "isYahooFinance")
     val isYahooFinance: Boolean,
-    @SerialName("longname")
-    val longname: String,
-    @SerialName("nameChangeDate")
-    val nameChangeDate: String?,
-    @SerialName("newListingDate")
-    val newListingDate: String?,
-    @SerialName("prevName")
-    val prevName: String?,
-    @SerialName("quoteType")
-    val quoteType: String,
-    @SerialName("score")
-    val score: Int,
-    @SerialName("sector")
-    val sector: String,
-    @SerialName("sectorDisp")
-    val sectorDisp: String,
-    @SerialName("shortname")
-    val shortname: String,
-    @SerialName("symbol")
-    val symbol: String,
-    @SerialName("typeDisp")
-    val typeDisp: String
+    @Json(name = "longname")
+    val longname: String?,
+    @Json(name = "quoteType")
+    val quoteType: String?,
+    @Json(name = "score")
+    val score: Double,
+    @Json(name = "sector")
+    val sector: String?,
+    @Json(name = "sectorDisp")
+    val sectorDisp: String?,
+    @Json(name = "shortname")
+    val shortname: String?,
+    @Json(name = "symbol")
+    val symbol: String?,
+    @Json(name = "typeDisp")
+    val typeDisp: String?
 )
