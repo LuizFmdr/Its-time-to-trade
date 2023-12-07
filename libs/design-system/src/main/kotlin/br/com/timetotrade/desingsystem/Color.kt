@@ -68,7 +68,13 @@ val LightCarmin = Color(0xFFAE445A)
 
 val seed = Color(0xFF1B1C1E)
 
-val PrimaryDark = Color(0xFF303030)
+val PrimaryDark = Color(0xFF000000)
+val PrimaryLight = Color(0xFF1A1A1A)
+val PrimaryDarkVariant = Color(0xFF191919)
+val PrimaryHighlight = Color(0xFF2ef8a0)
 val SecondaryDark = Color(0xFF1F6E8C)
+val SecondaryLight = Color(0xFFf6f6f6)
 val TertiaryDark = Color(0xFF84A7A1)
+
+val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 //val PrimaryDark = Color(0xFF1B1C1E)

@@ -19,7 +19,6 @@ secrets {
 
 dependencies {
     api(libs.retrofit)
-    implementation(libs.coil)
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.coroutines.android)
     api(libs.retrofit.kotlin.serialization)
