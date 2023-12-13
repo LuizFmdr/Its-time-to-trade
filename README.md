@@ -16,4 +16,4 @@ put you key in `local.properties`, the example file is in the root `secretes.def
 
 
 
-<img align="center" src="https://github.com/LuizFmdr/Its-time-to-trade/assets/34826500/e8280de6-1b03-4883-a48b-6200e291b5f3" width="300"/>
+https://github.com/LuizFmdr/Its-time-to-trade/assets/34826500/960e831b-0c6c-45bb-8251-8413a78b6931
