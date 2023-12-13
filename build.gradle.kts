@@ -24,7 +24,6 @@ buildscript {
     dependencies {
         classpath(libs.android.gradlePlugin)
         classpath(libs.kotlin.gradlePlugin)
-        classpath(libs.kotlin.serialization)
         classpath(libs.hilt.android.plugin)
     }
 }

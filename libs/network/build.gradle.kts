@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.timetotrade.android.hilt)
     alias(libs.plugins.timetotrade.android.moshi)
     alias(libs.plugins.secrets)
-    id("kotlinx-serialization")
 }
 
 android {
