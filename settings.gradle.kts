@@ -18,7 +18,16 @@ dependencyResolutionManagement {
 rootProject.name = "timetotrade"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
-include(":app:menu-list")
-include(":libs:design-system")
-include(":feature:menu-list")
+
+include(
+    ":feature:marketsummary",
+    ":feature:search"
+)
+
+include(
+    ":libs:design-system",
+    ":libs:network",
+    ":libs:common",
+)
