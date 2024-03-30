@@ -33,6 +33,7 @@ material = "1.11.0"
 uiTooling = "1.6.4"
 moshi = "1.15.1"
 moshi-converter = "2.11.0"
+doctor = "0.9.2"
 
 [libraries]
 
@@ -91,12 +92,11 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", vers
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+doctor = { id = "com.osacky.doctor", version.ref = "doctor" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 
 # Plugins defined by this project

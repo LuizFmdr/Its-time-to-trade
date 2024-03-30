@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.detekt)
+    alias(libs.plugins.doctor)
 }
 
 buildscript {
@@ -31,6 +32,14 @@ buildscript {
 
 dependencies {
     detektPlugins(libs.detekt.formatting)
+}
+
+doctor {
+    allowBuildingAllAndroidAppsSimultaneously = true
+    warnWhenNotUsingParallelGC = false
+    javaHome {
+        failOnError.set(false)
+    }
 }
 
 detekt {
