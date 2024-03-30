@@ -1,3 +1,4 @@
+import io.github.detekt.gradle.DetektKotlinCompilerPlugin
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
@@ -49,12 +50,33 @@ detekt {
     basePath = projectDir.absolutePath
     reportsDir = file("$projectDir/build/reports/detekt/")
 
-    source.setFrom(
+/*    source.setFrom(
         files(
             "$projectDir/app/src",
             "$projectDir/feature/marketsummary/src",
         )
-    )
+    )*/
+}
+
+tasks.register("detektAll", Detekt::class.java){
+    val autoFix = project.hasProperty("detektAutoFix")
+
+    description = "Custom DETEKT build for all modules"
+    parallel = true
+    ignoreFailures = true
+    autoCorrect = autoFix
+    buildUponDefaultConfig = true
+    setSource(file(projectDir))
+    config.setFrom(file("${rootProject.projectDir}/config/detekt/detekt.yml"))
+    include("**/*.kt")
+    exclude("**/resources/**", "**/build/**")
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        txt.required.set(true)
+        sarif.required.set(true)
+        reportsDir = file("$projectDir/build/reports/detekt/")
+    }
 }
 
 tasks.withType<Detekt>().configureEach {
