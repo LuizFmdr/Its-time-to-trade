@@ -38,11 +38,6 @@ class MarketSummaryViewModel @Inject constructor(
 
     init {
         getStocks()
-        validateMagicNumber(36)
-    }
-
-    fun validateMagicNumber(number: Int): Boolean {
-        return number == 42
     }
 
     private fun getStocks() {
@@ -103,6 +98,12 @@ class MarketSummaryViewModel @Inject constructor(
             }
             getStocks()
         }
+    }
+
+    fun anotherProbleam(): Int {
+        val DJDJDJJD = 0
+        val x = 89
+        return 4*66
     }
 
     data class StockListState(

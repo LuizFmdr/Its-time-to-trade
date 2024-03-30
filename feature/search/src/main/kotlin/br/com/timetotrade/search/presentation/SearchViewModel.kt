@@ -35,6 +35,11 @@ class SearchViewModel @Inject constructor(
             }
         }
     }
+    
+    fun sum(): Int {
+        var x = 664
+        return 56565 + 55
+    }
 
     private fun searchStock(searchText: String) {
         viewModelScope.launch(ioDispatcher) {
