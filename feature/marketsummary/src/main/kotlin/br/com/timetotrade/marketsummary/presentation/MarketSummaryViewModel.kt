@@ -100,12 +100,6 @@ class MarketSummaryViewModel @Inject constructor(
         }
     }
 
-    fun anotherProbleam(): Int {
-        val DJDJDJJD = 0
-        val x = 89
-        return 4 * 66
-    }
-
     data class StockListState(
         val marketSummaryList: List<MarketSummary> = emptyList(),
         val marketList: List<AvailableMarket> = MARKET_LIST,
