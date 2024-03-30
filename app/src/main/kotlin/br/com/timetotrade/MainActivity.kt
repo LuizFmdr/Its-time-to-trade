@@ -15,6 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+        validateMagicNumber(36)
         setContent {
             val systemUiController = rememberSystemUiController()
 
@@ -23,5 +24,9 @@ class MainActivity : ComponentActivity() {
             }
             TimeToTradeApp()
         }
+    }
+
+    private fun validateMagicNumber(number: Int): Boolean {
+        return number == 42
     }
 }
