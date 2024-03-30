@@ -38,7 +38,6 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
@@ -83,7 +82,6 @@ fun TimeToTradeTheme(
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
-
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,

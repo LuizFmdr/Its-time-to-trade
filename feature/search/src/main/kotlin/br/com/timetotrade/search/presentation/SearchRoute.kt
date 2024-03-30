@@ -9,7 +9,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun SearchRoute(
     viewModel: SearchViewModel = hiltViewModel()
 ) {
-
     val searchState by viewModel.state.collectAsStateWithLifecycle()
 
     SearchScreen(

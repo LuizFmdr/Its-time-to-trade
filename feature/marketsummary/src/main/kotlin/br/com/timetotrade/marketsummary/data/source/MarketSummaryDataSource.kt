@@ -2,12 +2,12 @@ package br.com.timetotrade.marketsummary.data.source
 
 import br.com.timetotrade.marketsummary.data.MarketService
 import br.com.timetotrade.marketsummary.data.model.MarketResult
-import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-//As was requested, the update interval was set as 8 seconds
+// As was requested, the update interval was set as 8 seconds
 const val UPDATE_INTERVAL = 8000L
 
 interface MarketSummaryDataSource {

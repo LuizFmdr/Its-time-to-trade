@@ -53,7 +53,6 @@ fun MarketSummaryRoute(
     goToSearch: () -> Unit = {},
     viewModel: MarketSummaryViewModel = hiltViewModel(),
 ) {
-
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val listState = rememberLazyListState()
@@ -67,7 +66,8 @@ fun MarketSummaryRoute(
         sheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
         sheetContent = {
             BottomSheetContent(state.marketList, viewModel::handleIntents)
-        }) {
+        }
+    ) {
         MarketSummaryScreen(
             listState = listState,
             state = state,

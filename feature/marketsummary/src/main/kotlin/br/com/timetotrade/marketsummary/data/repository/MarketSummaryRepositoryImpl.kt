@@ -5,9 +5,9 @@ import br.com.timetotrade.marketsummary.domain.MarketSummaryRepository
 import br.com.timetotrade.marketsummary.domain.model.MarketSummary
 import br.com.timetotrade.marketsummary.domain.model.RegularMarketValue
 import br.com.timetotrade.marketsummary.domain.model.Spark
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 class MarketSummaryRepositoryImpl @Inject constructor(
     private val dataSource: MarketSummaryDataSource

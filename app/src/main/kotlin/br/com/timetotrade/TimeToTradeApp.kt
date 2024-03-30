@@ -11,7 +11,6 @@ import br.com.timetotrade.navigation.AppNavHost
 @Composable
 fun TimeToTradeApp() {
     TimeToTradeTheme {
-
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = PrimaryDark

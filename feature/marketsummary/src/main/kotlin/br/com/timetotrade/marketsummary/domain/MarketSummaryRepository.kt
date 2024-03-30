@@ -6,5 +6,4 @@ import kotlinx.coroutines.flow.Flow
 interface MarketSummaryRepository {
 
     fun getMarketSummary(selectedMarket: String): Flow<List<MarketSummary>>
-
 }

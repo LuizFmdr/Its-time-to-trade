@@ -77,4 +77,4 @@ val SecondaryLight = Color(0xFFf6f6f6)
 val TertiaryDark = Color(0xFF84A7A1)
 
 val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
-//val PrimaryDark = Color(0xFF1B1C1E)
+// val PrimaryDark = Color(0xFF1B1C1E)
