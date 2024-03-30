@@ -10,7 +10,6 @@ import br.com.timetotrade.search.navigation.searchScreen
 
 @Composable
 fun AppNavHost() {
-
     val navController = rememberNavController()
 
     NavHost(

@@ -7,7 +7,6 @@ import br.com.timetotrade.marketsummary.MarketSummaryRoute
 const val marketSummaryRoute = "marketSummary"
 
 fun NavGraphBuilder.marketSummaryScreen(onSearchClick: () -> Unit) {
-
     composable(
         route = marketSummaryRoute,
     ) {

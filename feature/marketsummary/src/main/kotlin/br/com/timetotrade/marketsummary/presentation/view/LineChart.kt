@@ -12,14 +12,11 @@ import br.com.timetotrade.marketsummary.domain.model.Spark
 
 @Composable
 fun LineChart(modifier: Modifier = Modifier, spark: Spark) {
-
     Row(modifier = modifier) {
-
         val lineColor =
             if (spark.closeList.last() > spark.closeList.first()) LightOlive else LightCarmin
 
         for (pair in spark.closeZipList) {
-
             val fromValuePercentage = getValuePercentageForRange(pair.first, spark.max, spark.min)
             val toValuePercentage = getValuePercentageForRange(pair.second, spark.max, spark.min)
 
@@ -44,7 +41,8 @@ fun LineChart(modifier: Modifier = Modifier, spark: Spark) {
                         end = toPoint,
                         strokeWidth = 3f
                     )
-                })
+                }
+            )
         }
     }
 }

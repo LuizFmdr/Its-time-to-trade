@@ -1,4 +1,3 @@
-import io.github.detekt.gradle.DetektKotlinCompilerPlugin
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {

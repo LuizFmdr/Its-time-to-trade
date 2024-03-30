@@ -21,17 +21,20 @@ fun NavGraphBuilder.searchScreen() {
         enterTransition = {
             fadeIn(
                 animationSpec = tween(
-                    300, easing = LinearEasing
+                    300,
+                    easing = LinearEasing
                 )
             )
         },
         exitTransition = {
             fadeOut(
                 animationSpec = tween(
-                    300, easing = LinearEasing
+                    300,
+                    easing = LinearEasing
                 )
             )
-        }) {
+        }
+    ) {
         SearchRoute()
     }
 }

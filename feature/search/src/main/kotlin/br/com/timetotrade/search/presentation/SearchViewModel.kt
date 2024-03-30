@@ -8,13 +8,13 @@ import br.com.timetotrade.search.domain.model.SearchResult
 import br.com.timetotrade.search.presentation.SearchViewModel.SearchState
 import br.com.timetotrade.search.presentation.SearchViewModel.SearchUiAction
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -35,7 +35,7 @@ class SearchViewModel @Inject constructor(
             }
         }
     }
-    
+
     fun sum(): Int {
         var x = 664
         return 56565 + 55

@@ -53,7 +53,6 @@ fun SearchScreen(
     searchState: SearchState,
     onSearchTextChanged: (String) -> Unit
 ) {
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = PrimaryDark,

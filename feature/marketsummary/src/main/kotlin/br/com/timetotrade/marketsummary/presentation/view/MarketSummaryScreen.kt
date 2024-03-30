@@ -84,7 +84,8 @@ fun MarketSummaryScreen(
                 text = {
                     Text(
                         text = stringResource(
-                            R.string.summary_fab_text, state.marketList.currentMarketCode
+                            R.string.summary_fab_text,
+                            state.marketList.currentMarketCode
                         )
                     )
                 },
@@ -121,7 +122,6 @@ fun MarketSummaryScreen(
 
 @Composable
 fun Search(onFocusChange: (Boolean) -> Unit) {
-
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
@@ -190,13 +190,17 @@ fun SummaryItem(modifier: Modifier, marketSummary: MarketSummary) {
                     Text(
                         text = marketSummary.currentPoints.toString(),
                         style = TextStyle(
-                            fontSize = 16.sp, fontWeight = FontWeight.W400, color = SecondaryLight
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.W400,
+                            color = SecondaryLight
                         ),
                     )
                     Text(
                         text = marketSummary.todayComparedToPreviousClose.toString(),
                         style = TextStyle(
-                            fontSize = 16.sp, fontWeight = FontWeight.W400, color = PrimaryHighlight
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.W400,
+                            color = PrimaryHighlight
                         ),
                     )
                 }
