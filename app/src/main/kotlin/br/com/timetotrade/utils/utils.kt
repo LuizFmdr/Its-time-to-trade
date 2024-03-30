@@ -1,6 +1,6 @@
 package br.com.timetotrade.utils
 
-import com.squareup.leakcanary.core.BuildConfig
+import br.com.timetotrade.BuildConfig
 
 fun onDebug(block: () -> Unit) {
     if (BuildConfig.DEBUG) {
