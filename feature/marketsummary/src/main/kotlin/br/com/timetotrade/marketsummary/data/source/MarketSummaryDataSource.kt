@@ -2,7 +2,6 @@ package br.com.timetotrade.marketsummary.data.source
 
 import br.com.timetotrade.marketsummary.data.MarketService
 import br.com.timetotrade.marketsummary.data.model.CurrencyExchangeRateResponse
-import br.com.timetotrade.marketsummary.data.model.SupportedCurrenciesResponse
 import br.com.timetotrade.marketsummary.data.model.SupportedCurrencyResponse
 import br.com.timetotrade.marketsummary.db.dao.SupportedCurrenciesDao
 import br.com.timetotrade.marketsummary.db.model.asExternalModel

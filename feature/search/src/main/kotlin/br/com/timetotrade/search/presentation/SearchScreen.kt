@@ -182,7 +182,7 @@ fun DefaultPreviewDark() {
                 hasAnyResult = true,
                 resultList = (0..30).map {
                     listOf(
-                        br.com.timetotrade.search.domain.model.SearchResult(
+                        SearchResult(
                             shortName = "Uber Technologies Inc",
                             longName = "Uber Technologies Inc",
                             symbol = "UBER",

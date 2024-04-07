@@ -1,7 +1,6 @@
 package br.com.timetotrade.marketsummary.presentation.view
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -59,7 +58,6 @@ import java.time.LocalDateTime
 import kotlin.random.Random
 import kotlinx.coroutines.Dispatchers
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CurrencyConvertScreen(
     loading: Boolean = false,

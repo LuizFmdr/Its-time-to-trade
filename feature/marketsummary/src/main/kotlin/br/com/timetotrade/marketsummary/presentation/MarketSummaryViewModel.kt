@@ -11,7 +11,6 @@ import br.com.timetotrade.marketsummary.domain.model.MARKET_LIST
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.MarketSummaryUiAction
 import br.com.timetotrade.marketsummary.presentation.MarketSummaryViewModel.StockListState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -19,6 +18,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
 class MarketSummaryViewModel @Inject constructor(
