@@ -7,12 +7,9 @@ import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
-            .newBuilder()
-            .addHeader("X-RapidAPI-Key", BuildConfig.API_KEY)
-            .addHeader("X-RapidAPI-Host", BuildConfig.API_HOST)
-            .build()
-
+        var request = chain.request()
+        val url = request.url.newBuilder().addQueryParameter("apikey", BuildConfig.API_KEY).build()
+        request = request.newBuilder().url(url).build()
         return chain.proceed(request)
     }
 }

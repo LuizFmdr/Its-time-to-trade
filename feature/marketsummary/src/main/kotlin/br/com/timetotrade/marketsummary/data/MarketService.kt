@@ -1,13 +1,18 @@
 package br.com.timetotrade.marketsummary.data
 
-import br.com.timetotrade.marketsummary.data.model.MarketSummaryResponse
+import br.com.timetotrade.marketsummary.data.model.CurrencyExchangeRateResponse
+import br.com.timetotrade.marketsummary.data.model.SupportedCurrenciesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MarketService {
 
-    @GET("market/v2/get-summary")
-    suspend fun getMarketSummary(
-        @Query("region") region: String,
-    ): MarketSummaryResponse
+    @GET("rates/latest")
+    suspend fun getCurrencyExchangeRate(
+        @Query("base") baseCurrency: String,
+    ): CurrencyExchangeRateResponse
+
+    @GET("supported-currencies")
+    suspend fun getSupportedCurrencies(
+    ): SupportedCurrenciesResponse
 }

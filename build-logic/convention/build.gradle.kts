@@ -22,6 +22,7 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
 }
 
 gradlePlugin {
@@ -40,6 +41,10 @@ gradlePlugin {
         register("androidMoshi") {
             id = "timetotrade.android.moshi"
             implementationClass = "AndroidMoshiConventionPlugin"
+        }
+        register("androidRoom") {
+            id = "timetotrade.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
         }
         register("androidLibraryCompose") {
             id = "timetotrade.android.library.compose"

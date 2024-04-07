@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.doctor)
+    alias(libs.plugins.room) apply false
 }
 
 buildscript {

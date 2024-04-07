@@ -2,7 +2,6 @@
 
 androidGradlePlugin = "8.3.1"
 kotlin = "1.9.23"
-gradle = "8.3.1"
 hilt = "2.51.1"
 androidxCore = "1.12.0"
 androidxCoreSplashscreen = "1.0.1"
@@ -34,11 +33,13 @@ uiTooling = "1.6.4"
 moshi = "1.15.1"
 moshi-converter = "2.11.0"
 doctor = "0.9.2"
+room = "2.6.1"
+firebaseCrashlyticsPlugin = "2.9.9"
+firebasePerfPlugin = "1.4.2"
 
 [libraries]
 
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
-android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-viewmodel-compose" }
@@ -75,7 +76,6 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-android" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "moshi-converter" }
-ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
@@ -89,6 +89,16 @@ androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-j
 androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
+# Dependencies of the included build-logic
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+firebase-crashlytics-gradlePlugin = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsPlugin" }
+firebase-performance-gradlePlugin = { group = "com.google.firebase", name = "perf-plugin", version.ref = "firebasePerfPlugin" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
@@ -98,12 +108,14 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
+room = { id = "androidx.room", version.ref = "room" }
 
 # Plugins defined by this project
 timetotrade-android-application = { id = "timetotrade.android.application", version = "unspecified" }
 timetotrade-android-application-compose = { id = "timetotrade.android.application.compose", version = "unspecified" }
 timetotrade-android-hilt = { id = "timetotrade.android.hilt", version = "unspecified" }
 timetotrade-android-moshi = { id = "timetotrade.android.moshi", version = "unspecified" }
+timetotrade-android-room = { id = "timetotrade.android.room", version = "unspecified" }
 timetotrade-android-library = { id = "timetotrade.android.library", version = "unspecified" }
 timetotrade-android-library-compose = { id = "timetotrade.android.library.compose", version = "unspecified" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin1920" }
